@@ -1,0 +1,16 @@
+spring:
+  application:
+    name: CandleAggregationService
+  datasource:
+    url: jdbc:postgresql://localhost:5432/candle_aggregation_service
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: none   # create tables from entities on startup
+    show-sql: true       # prints SQL in console
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
