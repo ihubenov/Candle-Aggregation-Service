@@ -6,6 +6,10 @@ This Spring Boot application ingests bid/ask tick events, aggregates them into O
 - Key components: HistoryController (API), CandleAggregationService/Impl (aggregation), CandleRepository (persistence), CandleInterval (time buckets)
 - Endpoint: GET /history?symbol=SYMBOL&interval=1m&from=FROM&to=TO returns arrays t/o/h/l/c/v with s=ok; invalid intervals return s=error with errmsg
 - in src/main/resources/db/db-init.sql we can see the schema for generating the table and continuous materialized views in TimeScale DB. I have added also indexes on the main table and the materialized views, as well as compression policy on the main table
+- For adding new timeframes, we need to do two things:
+    * add the new time frame to CandleInterval enum
+    * create a new continuous materialized view for this period following the same naming strategy. Examples can be seen in db-init.sql
+- For adding new symbols in our Data Generator we simply have to add another record to initialPricePerRecord hashmap.
 
 Assumptions or trade-offs
 
@@ -14,6 +18,7 @@ Assumptions or trade-offs
 - Minimal validation (no auth/pagination); focus on aggregation correctness and simple API
 - Persistence prefers batch upserts to PostgreSQL; tests mock the repository (DB not required for running tests)
 
+Note about tests: I did not have enough time to write integration tests. If they are required and the deadline can be extended a bit I could finish them
 Instructions for running tests
 
 - Prerequisites: Internet access so Gradle can download the toolchain and dependencies
