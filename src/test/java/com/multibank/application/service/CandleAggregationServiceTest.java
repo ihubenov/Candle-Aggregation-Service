@@ -4,7 +4,7 @@ import com.multibank.application.entity.CandleEntity;
 import com.multibank.application.model.BidAskEvent;
 import com.multibank.application.model.Candle;
 import com.multibank.application.model.CandleInterval;
-import com.multibank.application.repository.CandleRepository;
+import com.multibank.application.repository.CandleCustomJdbcRepository;
 import com.multibank.application.service.impl.CandleAggregationServiceImpl;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
@@ -26,7 +26,7 @@ import static org.mockito.Mockito.*;
 public class CandleAggregationServiceTest {
 
     @Mock
-    private CandleRepository repository;
+    private CandleCustomJdbcRepository repository;
 
     @Captor
     private ArgumentCaptor<List<CandleEntity>> candleCaptor;

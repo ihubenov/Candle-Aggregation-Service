@@ -78,8 +78,7 @@ public class DataGenerator {
                     System.currentTimeMillis()
             );
 
-            // System.err.println(event);
-            // candleAggregationService.processEvent(event);
+            candleAggregationService.processEvent(event);
         } catch (Exception e) {
             log.error("Error generating event for {}", symbol, e);
         }

@@ -41,6 +41,5 @@ public class CandleEntity {
         private Long time;
         private String symbol;
     }
-
-    public CandleEntity(Candle candle) {}
+    
 }

@@ -4,11 +4,10 @@ import com.multibank.application.entity.CandleEntity;
 import com.multibank.application.model.BidAskEvent;
 import com.multibank.application.model.Candle;
 import com.multibank.application.model.CandleInterval;
-import com.multibank.application.repository.CandleRepository;
+import com.multibank.application.repository.CandleCustomJdbcRepository;
 import com.multibank.application.service.CandleAggregationService;
 import jakarta.annotation.PreDestroy;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -18,7 +17,7 @@ import java.util.concurrent.*;
 @Service
 public class CandleAggregationServiceImpl implements CandleAggregationService {
 
-    private final CandleRepository repository;
+    private final CandleCustomJdbcRepository repository;
 
     // Open candle buffer - keeps candles that are still accumulating ticks
     private final Map<String, CandleBuilder> openCandleBuffer;
@@ -35,7 +34,7 @@ public class CandleAggregationServiceImpl implements CandleAggregationService {
 
     private int realtimeWindowSeconds = 120;
 
-    public CandleAggregationServiceImpl(CandleRepository repository) {
+    public CandleAggregationServiceImpl(CandleCustomJdbcRepository repository) {
         this.repository = repository;
         this.openCandleBuffer = new ConcurrentHashMap<>();
         this.closedCandleBuffer = new ConcurrentHashMap<>();
